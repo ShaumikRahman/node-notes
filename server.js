@@ -4,10 +4,12 @@ const app = express();
 const PORT = 3000 || process.env.PORT;
 
 app.get('/', (req, res) => {
+    res.setHeader('Content-Type', 'text/html');
     res.sendFile(path.join(__dirname, 'pages', 'index.html'));
 });
 
 app.get('/about', (req, res) => {
+    res.setHeader('Content-Type', 'text/html');
     res.sendFile(path.join(__dirname, 'pages', 'about.html'));
 });
 
