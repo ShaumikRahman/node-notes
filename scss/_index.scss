@@ -1,0 +1,26 @@
+.Index {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    // &__formContainer {
+        
+    // }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    &__text {
+        outline: none;
+        border-radius: 6px;
+    }
+
+    &__submit {
+        width: 15%;
+        cursor: pointer;
+    }
+}
