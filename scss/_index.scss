@@ -1,3 +1,23 @@
+.Navbar {
+    display: flex;
+    justify-content: space-evenly;
+
+    // &__text {
+    //     font-size: 1px;
+    // }
+
+    &__link {
+        text-decoration: none;
+        color: #fafafa;
+        cursor: pointer;
+        transition: color 150ms ease-in-out;
+    }
+
+    &__link:hover {
+        color: #0070f0;
+    }
+}
+
 .Index {
     display: flex;
     flex-direction: column;
