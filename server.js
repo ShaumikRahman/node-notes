@@ -1,19 +1,27 @@
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 const app = express();
 const PORT = 3000 || process.env.PORT;
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.get('/', (req, res) => {
-//     res.setHeader('Content-Type', 'text/html');
-//     res.sendFile(path.join(__dirname, 'pages', 'index.html'));
-// });
+app.post('/', async (req,res) => {
+    res.setHeader('Content-type', 'application/json');
 
-// app.get('/about', (req, res) => {
-//     res.setHeader('Content-Type', 'text/html');
-//     res.sendFile(path.join(__dirname, 'pages', 'about.html'));
-// });
+    fs.readFile(path.join(__dirname, 'notes', 'test.txt'), 'utf-8', (err, data) => {
+        if (err) {
+            console.log(err);
+            res.end();
+        } else {
+            console.log(data);
+            res.send({
+                text: data
+            });
+        }
+    });
+})
+
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
