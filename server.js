@@ -1,53 +1,83 @@
-const express = require('express');
-const path = require('path');
-const fs = require('fs');
+const uuid = require("uuid");
+const express = require("express");
+const path = require("path");
+const fs = require("fs");
+const { json } = require("express/lib/response");
 const app = express();
 const PORT = 3000 || process.env.PORT;
-
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 
-app.post('/', async (req,res) => {
-     res.setHeader('Content-type', 'application/json');
+app.post("/", async (req, res) => {
+  res.setHeader("Content-type", "application/json");
 
-    fs.readFile(path.join(__dirname, 'notes', 'notes.json'), 'utf-8', (err, data) => {
-        if (err) {
-            console.log(err);
-            res.end();
-        } else {
-                res.send(data);
-        }
-    });
-})
+  fs.readFile(
+    path.join(__dirname, "notes", "notes.json"),
+    "utf-8",
+    (err, data) => {
 
-app.post('/add', async (req,res) => {
-    res.setHeader('Content-type', 'application/json');
+      if (err) {
+        console.log(err);
+        res.end({
+          result: "fail",
+        });
+      } else {
+        res.send(data);
+      }
+    }
+  );
+});
 
-    console.log(req.body.note);
+app.post("/add", async (req, res) => {
+  res.setHeader("Content-type", "application/json");
 
-    fs.readFile(path.join(__dirname, 'notes', 'notes.json'), 'utf-8', (err, data) => {
-        if (err) {
-            console.log(err);
-            res.end({
-                result: 'fail'
-            });
-        } else {
-            const notes = [...JSON.parse(data), {
-                id: '4',
-                title: 'this is the new note',
-                created: new Date(),
-                modified: "",
-                body: req.body.note
-            }];
+  console.log(req.body.note);
 
-            res.send(JSON.stringify(notes));
+  fs.readFile(
+    path.join(__dirname, "notes", "notes.json"),
+    "utf-8",
+    (err, data) => {
+      if (err) {
+        console.log(err);
+        res.end({
+          result: "fail",
+        });
+      } else {
+        const notes = [
+          ...JSON.parse(data),
+          {
+            id: uuid.v4(),
+            title: req.body.title,
+            created: new Date(),
+            modified: "",
+            body: req.body.note,
+          },
+        ];
 
-            // TODO dynamic ID
-        }
-    });
-})
+        fs.writeFile(
+          path.join(__dirname, "notes", "notes.json"),
+          "test",
+          "utf-8",
+          (err) => {
+            if (err) {
+              console.log(err);
+              res.end({
+                result: "fail",
+              });
+            }
+          }
+        );
 
+        // write WIP
+
+        res.send({
+          result: "success",
+        });
+      }
+    }
+  );
+});
 
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });

@@ -2,11 +2,13 @@ const notes = document.getElementById("notes");
 const form = document.getElementById("form");
 
 window.onload = () => {
+  console.log('onload');
   fetch("/", {
     method: "post",
   })
     .then((res) => res.json())
     .then((data) => {
+      console.log(data);
       data.forEach((note) => {
         notes.innerHTML += `<p>Note ${note.id}, ${
           note.title
@@ -18,13 +20,14 @@ window.onload = () => {
 form.onsubmit = (e) => {
   e.preventDefault();
 
-  const note = e.target.note.value.trim().replace(/\s\s+/g, " ");
+  const title = cleanString(e.target.title.value);
+  const note = cleanString(e.target.note.value);
 
   console.log(note);
 
   fetch("/add", {
     method: "POST",
-    body: JSON.stringify({ note }),
+    body: JSON.stringify({ title, note }),
     headers: {
       "Content-type": "application/json",
     },
@@ -32,3 +35,7 @@ form.onsubmit = (e) => {
     .then((res) => res.json())
     .then((data) => console.log(data));
 };
+
+function cleanString(str) {
+  return str.trim().replace(/\s\s+/g, " ");
+}
