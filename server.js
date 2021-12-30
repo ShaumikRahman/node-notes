@@ -11,6 +11,8 @@ app.use(express.json());
 app.post("/", async (req, res) => {
   res.setHeader("Content-type", "application/json");
 
+  console.log(typeof new Date().toString());
+
   fs.readFile(
     path.join(__dirname, "notes", "notes.json"),
     "utf-8",
@@ -48,30 +50,24 @@ app.post("/add", async (req, res) => {
           {
             id: uuid.v4(),
             title: req.body.title,
-            created: new Date(),
+            created: new Date().getTime(),
             modified: "",
             body: req.body.note,
           },
         ];
 
-        fs.writeFile(
-          path.join(__dirname, "notes", "notes.json"),
-          "test",
-          "utf-8",
-          (err) => {
-            if (err) {
-              console.log(err);
-              res.end({
-                result: "fail",
-              });
-            }
+        fs.writeFile(path.join(__dirname, 'notes', 'notes.json'), JSON.stringify(notes), err => {
+          if (err) {
+            res.end({
+              result: 'fail'
+            });
           }
-        );
+        });
 
         // write WIP
 
         res.send({
-          result: "success",
+          result: notes
         });
       }
     }

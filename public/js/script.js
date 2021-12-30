@@ -9,8 +9,8 @@ window.onload = () => {
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
-      data.forEach((note) => {
-        notes.innerHTML += `<p>Note ${note.id}, ${
+      data.forEach((note, index) => {
+        notes.innerHTML += `<p>Note ${index+1}, ID ${note.id}, ${
           note.title
         }, created at ${new Date(note.created * 1000)}, ${note.body}</p>`;
       });
