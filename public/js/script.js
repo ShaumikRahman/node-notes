@@ -2,7 +2,11 @@ const notes = document.getElementById("notes");
 const form = document.getElementById("form");
 
 window.onload = () => {
-  console.log('onload');
+  getNotes();
+};
+
+function getNotes() {
+  notes.innerHTML = '';
   fetch("/", {
     method: "post",
   })
@@ -15,7 +19,7 @@ window.onload = () => {
         }, created at ${new Date(note.created * 1000)}, ${note.body}</p>`;
       });
     });
-};
+}
 
 form.onsubmit = (e) => {
   e.preventDefault();
@@ -33,7 +37,8 @@ form.onsubmit = (e) => {
     },
   })
     .then((res) => res.json())
-    .then((data) => console.log(data));
+    .then((data) => getNotes());
+    
 };
 
 function cleanString(str) {
