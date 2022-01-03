@@ -6,7 +6,7 @@ window.onload = () => {
 };
 
 function getNotes() {
-  notes.innerHTML = '';
+  notes.innerHTML = "";
   fetch("/", {
     method: "post",
   })
@@ -14,9 +14,18 @@ function getNotes() {
     .then((data) => {
       console.log(data);
       data.forEach((note, index) => {
-        notes.innerHTML += `<p>Note ${index+1}, ID ${note.id}, ${
+
+        let temp = document.createElement("p");
+
+        temp.textContent = `Note ${index + 1}, ID ${note.id}, ${
           note.title
-        }, created at ${new Date(note.created * 1000)}, ${note.body}</p>`;
+        }, created at ${new Date(note.created * 1000)}, ${note.body}`;
+
+        notes.appendChild(temp);
+
+        // notes.innerHTML += `<p>Note ${index+1}, ID ${note.id}, ${
+        //   note.title
+        // }, created at ${new Date(note.created * 1000)}, ${note.body}</p>`;
       });
     });
 }
@@ -24,8 +33,11 @@ function getNotes() {
 form.onsubmit = (e) => {
   e.preventDefault();
 
+
   const title = cleanString(e.target.title.value);
   const note = cleanString(e.target.note.value);
+
+  form.reset();
 
   console.log(note);
 
@@ -38,7 +50,6 @@ form.onsubmit = (e) => {
   })
     .then((res) => res.json())
     .then((data) => getNotes());
-    
 };
 
 function cleanString(str) {

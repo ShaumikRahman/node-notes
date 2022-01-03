@@ -11,8 +11,6 @@ app.use(express.json());
 app.post("/", async (req, res) => {
   res.setHeader("Content-type", "application/json");
 
-  console.log(typeof new Date().toString());
-
   fs.readFile(
     path.join(__dirname, "notes", "notes.json"),
     "utf-8",
