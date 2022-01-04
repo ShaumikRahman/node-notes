@@ -15,13 +15,25 @@ function getNotes() {
       console.log(data);
       data.forEach((note, index) => {
 
-        let temp = document.createElement("p");
+        let noteElement = document.createElement("div");
+        noteElement.classList.add('Index__note');
 
-        temp.textContent = `Note ${index + 1}, ID ${note.id}, ${
-          note.title
-        }, created at ${new Date(note.created * 1000)}, ${note.body}`;
+        let noteHeader = document.createElement('h2');
+        noteHeader.classList.add('Index__title');
 
-        notes.appendChild(temp);
+        let noteBody = document.createElement('p');
+        noteBody.classList.add('Index__body');
+
+        noteHeader.textContent = `${note.title}`;
+        noteBody.textContent = `${note.body}`;
+
+        // temp.textContent = `Note ${index + 1}, ID ${note.id}, ${
+        //   note.title
+        // }, created at ${new Date(note.created * 1000)}, ${note.body}`;
+
+        noteElement.appendChild(noteHeader);
+        noteElement.appendChild(noteBody);
+        notes.appendChild(noteElement);
 
         // notes.innerHTML += `<p>Note ${index+1}, ID ${note.id}, ${
         //   note.title

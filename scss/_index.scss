@@ -44,4 +44,18 @@
         width: 15%;
         cursor: pointer;
     }
+
+    &__notesContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    &__title {
+        color: pink;
+    }
+
+    &__body {
+        color: purple
+    }
 }
