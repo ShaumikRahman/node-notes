@@ -51,6 +51,29 @@
         gap: 1rem;
     }
 
+    &__note {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    &__noteInfo {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    &__noteDeleteContainer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: red;
+    }
+
+    &__noteDelete {
+        cursor: pointer;
+    }
+
     &__title {
         color: pink;
     }

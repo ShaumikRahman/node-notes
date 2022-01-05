@@ -14,37 +14,48 @@ function getNotes() {
     .then((data) => {
       console.log(data);
       data.forEach((note, index) => {
+        const noteElement = document.createElement("div");
+        noteElement.classList.add("Index__note");
 
-        let noteElement = document.createElement("div");
-        noteElement.classList.add('Index__note');
+        const noteInfo = document.createElement("div");
+        noteInfo.classList.add("Index__noteInfo");
 
-        let noteHeader = document.createElement('h2');
-        noteHeader.classList.add('Index__title');
-
-        let noteBody = document.createElement('p');
-        noteBody.classList.add('Index__body');
+        const noteHeader = document.createElement("h2");
+        noteHeader.classList.add("Index__title");
+        const noteBody = document.createElement("p");
+        noteBody.classList.add("Index__body");
 
         noteHeader.textContent = `${note.title}`;
         noteBody.textContent = `${note.body}`;
 
-        // temp.textContent = `Note ${index + 1}, ID ${note.id}, ${
-        //   note.title
-        // }, created at ${new Date(note.created * 1000)}, ${note.body}`;
+        noteInfo.appendChild(noteHeader);
+        noteInfo.appendChild(noteBody);
 
-        noteElement.appendChild(noteHeader);
-        noteElement.appendChild(noteBody);
+        noteElement.appendChild(noteInfo);
+
+        const noteDeleteContainer = document.createElement("div");
+        noteDeleteContainer.classList.add("Index__noteDeleteContainer");
+
+        const noteDelete = document.createElement("p");
+        noteDelete.classList.add("Index__noteDelete");
+
+        noteDelete.textContent = "✕";
+
+        noteDeleteContainer.appendChild(noteDelete);
+        noteElement.appendChild(noteDeleteContainer);
+
         notes.appendChild(noteElement);
 
-        // notes.innerHTML += `<p>Note ${index+1}, ID ${note.id}, ${
-        //   note.title
-        // }, created at ${new Date(note.created * 1000)}, ${note.body}</p>`;
+        noteDelete.addEventListener('click', e => {
+          console.log(note.id);
+        });
+
       });
     });
 }
 
 form.onsubmit = (e) => {
   e.preventDefault();
-
 
   const title = cleanString(e.target.title.value);
   const note = cleanString(e.target.note.value);
