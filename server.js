@@ -72,6 +72,40 @@ app.post("/add", async (req, res) => {
   );
 });
 
+app.post("/delete", (req,res) => {
+  res.setHeader("Content-type", "application/json");
+
+  fs.readFile(path.join(__dirname, "notes", "notes.json"),
+  "utf-8",
+  (err,data) => {
+    if (err) {
+      console.log(err);
+      res.end({
+        result: "fail"
+      });
+    } else {
+
+      console.log(JSON.parse(data));
+
+      const newNotes = JSON.parse(data).filter(note => note.id !== req.body.id);
+
+      console.log(newNotes);
+
+      fs.writeFile(path.join(__dirname, "notes", "notes.json"), JSON.stringify(newNotes), err => {
+        if (err) {
+          console.log(err);
+          res.end({result: "fail to write"});
+        }
+      });
+
+      res.send({
+        newNotes
+      });
+    }
+  });
+
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
