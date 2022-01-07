@@ -6,7 +6,7 @@ window.onload = () => {
 };
 
 function getNotes() {
-  notes.innerHTML = "";
+  notes.textContent = "";
   fetch("/", {
     method: "post",
   })
@@ -18,7 +18,7 @@ function getNotes() {
 
 function setNotes(newNotes) {
 
-  notes.innerHTML = "";
+  notes.textContent = "";
 
 
   newNotes.forEach((note, index) => {
