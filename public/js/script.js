@@ -1,5 +1,10 @@
 const notes = document.getElementById("notes");
 const form = document.getElementById("form");
+const edit = document.getElementById("edit");
+
+edit.addEventListener('click', () => {
+  confirmEdit();
+});
 
 window.onload = () => {
   getNotes();
@@ -41,18 +46,30 @@ function setNotes(newNotes) {
 
     noteElement.appendChild(noteInfo);
 
-    const noteDeleteContainer = document.createElement("div");
-    noteDeleteContainer.classList.add("Index__noteDeleteContainer");
+    const noteControl = document.createElement("div");
+    noteControl.classList.add("Index__noteControl");
 
     const noteDelete = document.createElement("p");
     noteDelete.classList.add("Index__noteDelete");
 
+    const noteEdit = document.createElement("p");
+    noteEdit.classList.add("Index__noteEdit");
+
     noteDelete.textContent = "✕";
 
-    noteDeleteContainer.appendChild(noteDelete);
-    noteElement.appendChild(noteDeleteContainer);
+    noteEdit.textContent = "✎";
+
+    noteControl.appendChild(noteEdit);
+    noteControl.appendChild(noteDelete);
+
+
+    noteElement.appendChild(noteControl);
 
     notes.appendChild(noteElement);
+
+    noteEdit.addEventListener('click', e => {
+      startEdit(note.id, note.title, note.body);
+    });
 
     noteDelete.addEventListener('click', e => {
       deleteNote(note.id);
@@ -97,3 +114,28 @@ function deleteNote(id) {
   .then(res => res.json())
   .then(data => setNotes(data.newNotes));
 }
+
+function startEdit(id, title, text) {
+  form.submit.classList.add('hide');
+   form.edit.classList.remove('hide');
+   form.cancel.classList.remove('hide');
+
+   form.dataset.id = id;
+   form.title.focus();
+
+   form.title.value = title;
+   form.note.value = text;
+}
+
+function confirmEdit() {
+  console.log(form.dataset.id, form.title.value, form.note.value);
+  // WIP
+}
+
+function stopEdit() {
+  form.submit.classList.remove('hide');
+   form.edit.classList.add('hide');
+   form.cancel.classList.add('hide');
+   form.removeAttribute('data-id');
+}
+

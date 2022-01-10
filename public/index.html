@@ -30,7 +30,11 @@
             rows="10"
             placeholder="Type your note here..."
           ></textarea>
-          <button class="Index__submit" type="submit">Send</button>
+          <button class="Index__submit" id="submit" type="submit">Send</button>
+          <button class="Index__edit hide" id="edit" type="reset">Edit</button>
+          <button class="Index__cancel hide" id="cancel" type="reset" onclick="stopEdit()">
+            Cancel
+          </button>
         </form>
       </div>
       <div class="Index__notesContainer" id="notes"></div>

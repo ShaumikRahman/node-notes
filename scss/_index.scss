@@ -1,84 +1,102 @@
 .Navbar {
-    display: flex;
-    justify-content: center;
-    gap: 10vw;
+  display: flex;
+  justify-content: center;
+  gap: 10vw;
 
-    // &__text {
-    //     font-size: 1px;
-    // }
+  // &__text {
+  //     font-size: 1px;
+  // }
 
-    &__link {
-        text-decoration: none;
-        color: #fafafa;
-        cursor: pointer;
-        transition: color 150ms ease-in-out;
-    }
+  &__link {
+    text-decoration: none;
+    color: #fafafa;
+    cursor: pointer;
+    transition: color 150ms ease-in-out;
+  }
 
-    &__link:hover {
-        color: #0070f0;
-    }
+  &__link:hover {
+    color: #0070f0;
+  }
 }
 
 .Index {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .hide {
+    display: none;
+  }
+
+  &__form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    align-items: center;
+  }
 
-    // &__formContainer {
-        
-    // }
+  &__text,
+  &__title {
+    outline: none;
+    border-radius: 6px;
+  }
 
-    &__form {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        align-items: center;
-    }
+  button {
+      cursor: pointer;
+  }
 
-    &__text, &__title {
-        outline: none;
-        border-radius: 6px;
-    }
+  &__submit {
+    width: 15%;
+  }
 
-    &__submit {
-        width: 15%;
-        cursor: pointer;
-    }
+  &__cancel {
+    color: #ff1212;
+    border-color: #fb2121;
+    background-color: #ff9999;
+  }
 
-    &__notesContainer {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
+  &__notesContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 15rem;
+  }
 
-    &__note {
-        display: flex;
-        justify-content: space-between;
-        gap: 1rem;
-    }
+  &__note {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
 
-    &__noteInfo {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
+  &__noteInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
 
-    &__noteDeleteContainer {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: red;
-    }
+  &__noteControl {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+  }
 
-    &__noteDelete {
-        cursor: pointer;
-    }
+  &__noteEdit {
+    color: #fafafa;
+    cursor: pointer;
+  }
 
-    &__title {
-        color: pink;
-    }
+  &__noteDelete {
+    cursor: pointer;
+    color: red;
+  }
 
-    &__body {
-        color: purple
-    }
+  &__title {
+    color: pink;
+  }
+
+  &__body {
+    color: purple;
+  }
 }

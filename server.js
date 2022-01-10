@@ -62,8 +62,6 @@ app.post("/add", async (req, res) => {
           }
         });
 
-        // write WIP
-
         res.send({
           result: notes
         });
@@ -105,6 +103,8 @@ app.post("/delete", (req,res) => {
   });
 
 });
+
+
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
