@@ -128,8 +128,24 @@ function startEdit(id, title, text) {
 }
 
 function confirmEdit() {
-  console.log(form.dataset.id, form.title.value, form.note.value);
-  // WIP
+  const changes = {
+    id: form.dataset.id,
+    title: form.title.value,
+    note: form.note.value,
+    modified: new Date().getTime()
+  }
+
+  fetch("/edit", {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify(changes)
+  })
+  .then(res => res.json())
+  .then(data => setNotes(data.newNotes));
+
+  stopEdit();
 }
 
 function stopEdit() {

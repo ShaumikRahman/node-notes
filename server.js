@@ -15,7 +15,6 @@ app.post("/", async (req, res) => {
     path.join(__dirname, "notes", "notes.json"),
     "utf-8",
     (err, data) => {
-
       if (err) {
         console.log(err);
         res.end({
@@ -54,57 +53,113 @@ app.post("/add", async (req, res) => {
           },
         ];
 
-        fs.writeFile(path.join(__dirname, 'notes', 'notes.json'), JSON.stringify(notes), err => {
-          if (err) {
-            res.end({
-              result: 'fail'
-            });
+        fs.writeFile(
+          path.join(__dirname, "notes", "notes.json"),
+          JSON.stringify(notes),
+          (err) => {
+            if (err) {
+              res.end({
+                result: "fail",
+              });
+            }
           }
-        });
+        );
 
         res.send({
-          result: notes
+          result: notes,
         });
       }
     }
   );
 });
 
-app.post("/delete", (req,res) => {
+app.post("/delete", (req, res) => {
   res.setHeader("Content-type", "application/json");
 
-  fs.readFile(path.join(__dirname, "notes", "notes.json"),
-  "utf-8",
-  (err,data) => {
-    if (err) {
-      console.log(err);
-      res.end({
-        result: "fail"
-      });
-    } else {
+  fs.readFile(
+    path.join(__dirname, "notes", "notes.json"),
+    "utf-8",
+    (err, data) => {
+      if (err) {
+        console.log(err);
+        res.end({
+          result: "fail",
+        });
+      } else {
+        console.log(JSON.parse(data));
 
-      console.log(JSON.parse(data));
+        const newNotes = JSON.parse(data).filter(
+          (note) => note.id !== req.body.id
+        );
 
-      const newNotes = JSON.parse(data).filter(note => note.id !== req.body.id);
+        console.log(newNotes);
 
-      console.log(newNotes);
+        fs.writeFile(
+          path.join(__dirname, "notes", "notes.json"),
+          JSON.stringify(newNotes),
+          (err) => {
+            if (err) {
+              console.log(err);
+              res.end({ result: "fail to write" });
+            }
+          }
+        );
 
-      fs.writeFile(path.join(__dirname, "notes", "notes.json"), JSON.stringify(newNotes), err => {
-        if (err) {
-          console.log(err);
-          res.end({result: "fail to write"});
-        }
-      });
-
-      res.send({
-        newNotes
-      });
+        res.send({
+          newNotes,
+        });
+      }
     }
-  });
-
+  );
 });
 
+app.post("/edit", (req, res) => {
+  res.setHeader("Content-type", "application/json");
 
+  fs.readFile(
+    path.join(__dirname, "notes", "notes.json"),
+    "utf-8",
+    (err, data) => {
+      if (err) {
+        console.log(err);
+        res.end({
+          result: "fail",
+        });
+      } else {
+        const newNotes = JSON.parse(data).map((note) => {
+          if (note.id === req.body.id) {
+            return {
+              id: note.id,
+              title: req.body.title,
+              created: note.created,
+              modified: req.body.modified,
+              body: req.body.note,
+            };
+          } else {
+            return note;
+          }
+        });
+
+        fs.writeFile(
+          path.join(__dirname, "notes", "notes.json"),
+          JSON.stringify(newNotes),
+          {},
+          (err) => {
+            if (err) {
+              res.end({
+                result: "fail",
+              });
+            } else {
+              res.send({
+                newNotes
+              });
+            }
+          }
+        );
+      }
+    }
+  );
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
