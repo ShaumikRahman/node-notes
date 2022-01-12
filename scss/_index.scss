@@ -66,6 +66,15 @@
     display: flex;
     justify-content: space-between;
     gap: 1rem;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    transition: border 300ms ease-in-out;
+  }
+
+  &__note:hover {
+    border: 1px solid #fafafa;
+    border-radius: 6px;
+    transition: border 300ms ease-in-out;
   }
 
   &__noteInfo {
@@ -92,11 +101,4 @@
     color: red;
   }
 
-  &__title {
-    color: pink;
-  }
-
-  &__body {
-    color: purple;
-  }
 }
