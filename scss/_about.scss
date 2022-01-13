@@ -1,0 +1,11 @@
+.About {
+    display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  
+  &__text {
+    width: 66%;
+    text-align: center;
+    }
+}
