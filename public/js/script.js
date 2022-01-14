@@ -34,9 +34,9 @@ function setNotes(newNotes) {
     noteInfo.classList.add("Index__noteInfo");
 
     const noteHeader = document.createElement("h2");
-    noteHeader.classList.add("Index__title");
+    noteHeader.classList.add("Index__noteTitle");
     const noteBody = document.createElement("p");
-    noteBody.classList.add("Index__body");
+    noteBody.classList.add("Index__noteBody");
 
     noteHeader.textContent = `${note.title}`;
     noteBody.textContent = `${note.body}`;

@@ -3,9 +3,9 @@
     justify-content: center;
     gap: 10vw;
   
-    // &__text {
-    //     font-size: 1px;
-    // }
+    &__text {
+        font-size: clamp(1.25rem, 1.5vw, 5rem);
+    }
   
     &__link {
       text-decoration: none;

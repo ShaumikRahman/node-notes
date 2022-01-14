@@ -17,11 +17,24 @@
   &__text,
   &__title {
     outline: none;
-    border-radius: 6px;
+    border-radius: 3%;
+  }
+
+  &__title {
+    width: clamp(10rem, 9vw, 16rem);
+    height: clamp(1rem, 1vw, 2rem);
+    font-size: clamp(0.75rem, 1vw, 2rem);
+  }
+
+  &__text {
+    font-size: clamp(0.75rem, 1vw, 2rem);
   }
 
   button {
       cursor: pointer;
+      font-size: clamp(.80rem, 1vw, 1.25rem);
+      width: clamp(3rem, 4vw, 9rem);
+      
   }
 
   &__submit {
@@ -62,12 +75,24 @@
     gap: 1rem;
   }
 
+  &__noteTitle {
+    font-size: clamp(1.25rem, 1.5vw, 3rem);
+  }
+
+  &__noteBody {
+    font-size: clamp(1rem, 1.5vw, 2rem);
+  }
+
   &__noteControl {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     align-items: center;
     justify-content: center;
+
+    & > * {
+    font-size: clamp(1rem, 1.5vw, 2rem);
+    }
   }
 
   &__noteEdit {
