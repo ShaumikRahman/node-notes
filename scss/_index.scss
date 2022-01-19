@@ -17,7 +17,7 @@
   &__text,
   &__title {
     outline: none;
-    border-radius: 3%;
+    border-radius: .5rem;
   }
 
   &__title {
@@ -33,12 +33,15 @@
   button {
       cursor: pointer;
       font-size: clamp(.80rem, 1vw, 1.25rem);
-      width: clamp(3rem, 4vw, 9rem);
-      
+      border: none;
+      padding: .5rem;
+      border-radius: .25rem;
+      overflow: visible;
   }
 
   &__submit {
-    width: 15%;
+    color: #fafafa;
+    background-color: #8cd100;
   }
 
   &__cancel {
