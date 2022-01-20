@@ -10,4 +10,8 @@
     &__text {
         font-size: clamp(1.25rem, 1.5vw, 3rem);
     }
+    
+    &__link:visited {
+        color: #0070f0;
+    }
 }
