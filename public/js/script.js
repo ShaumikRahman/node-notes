@@ -78,15 +78,19 @@ function setNotes(newNotes) {
   });
 }
 
+form.oninput = (e) => {
+  form.title.value ? form.title.classList.remove('invalid') : '';
+  form.note.value ? form.note.classList.remove('invalid') : '';
+}
+
 form.onsubmit = (e) => {
   e.preventDefault();
 
   const title = cleanString(e.target.title.value);
   const note = cleanString(e.target.note.value);
 
-  form.reset();
-
-  console.log(note);
+  if (title && note) {
+    form.reset();
 
   fetch("/add", {
     method: "POST",
@@ -97,6 +101,12 @@ form.onsubmit = (e) => {
   })
     .then((res) => res.json())
     .then((data) => getNotes());
+  } else {
+    !title ? form.title.classList.add('invalid') : '';
+    !note ? form.note.classList.add('invalid') : '';
+  }
+
+  
 };
 
 function cleanString(str) {

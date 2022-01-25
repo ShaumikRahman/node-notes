@@ -30,6 +30,10 @@
     font-size: clamp(0.75rem, 1vw, 2rem);
   }
 
+  .invalid {
+    border: 1px solid red;
+  }
+
   button {
       cursor: pointer;
       font-size: clamp(.80rem, 1vw, 1.25rem);
