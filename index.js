@@ -6,6 +6,7 @@ const { json } = require("express/lib/response");
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(express.static(path.join(__dirname, "public")));
+app.use('/about', express.static(path.join(__dirname,'/about.html')));
 app.use(express.json());
 
 app.post("/", async (req, res) => {
