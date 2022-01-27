@@ -8,18 +8,6 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 
-app.get("/about", (req,res) => {
-  res.setHeader("Content-type", "text/html");
-
-  fs.readFile(path.join(__dirname, 'public', 'about.html'), {encoding: 'utf-8'}, (err,data) => {
-    if (err) {
-      throw err;
-    } else {
-      res.send(data);
-    }
-  });
-});
-
 app.post("/", async (req, res) => {
   res.setHeader("Content-type", "application/json");
 
